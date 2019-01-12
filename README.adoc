@@ -1,6 +1,6 @@
-= Servo Hardware PWM Library for Arduino =
+= Servo Hardware PWM Library for Arduino Mega=
 
-This library allows an Arduino board to control up to 6 Servos with 16-bit precision.
+This library allows an Arduino/Genuino Mega board to control up to 6 Servos with 16-bit precision.
 It can control servos with hardware PWM using timer3, timer4 and timer5.
 These timers allow a resolution of 16-bit.
 The output pins are pin 2, 3, 7, 8, 44, and 45.
