@@ -1,7 +1,7 @@
 /*
   Servo_Hardware_PWM.h - Library for using 6 Servos with fast, precise and lightweight hardware PWM.
   Created by Daniel Duller, 11. January, 2019.
-  Changed by Daniel Duller, 12. January, 2019.
+  Changed by Daniel Duller, 13. January, 2019.
 
   ###############################################################################
   MIT License
@@ -237,39 +237,81 @@ void Servo::attach(int pin)
 
 void Servo::detach()
 {
-	if (servoPin == 2) {
+ 	if (servoPin == 2) {
+		if(pinActive[1] == false){
+			//resetting the control register A and B:
+			TCCR3A = 0x0;
+			TCCR3B = 0x0;
+			//resetting the TOP value:
+			OCR3A = 0x0;
+		}
 		OCR3B = 0x0; //resetting the pulse width
-		DDRE |= (0 << PE4); //bit 4 (pin 2) stop output
-		pinActive[0] = false;		
-		this->servoPin = 0;
+		DDRE ^= (1 << PE4); //bit 4 (pin 2) stop output
+ 		pinActive[0] = false;		
+		this->servoPin = 0; 
 	}
 	else if (servoPin == 3) {
+		if(pinActive[0] == false){
+			//resetting the control register A and B:
+			TCCR3A = 0x0;
+			TCCR3B = 0x0;
+			//resetting the TOP value:
+			OCR3A = 0x0;
+		}
 		OCR3C = 0x0; //resetting the pulse width
-		DDRE |= (0 << PE5); //bit 5 (pin 3) stop output
+		DDRE ^= (1 << PE5); //bit 5 (pin 3) stop output
 		pinActive[1] = false;
 		this->servoPin = 0;
 	}
 	else if (servoPin == 7) {
+		if(pinActive[3] == false){
+			//resetting the control register A and B:
+			TCCR4A = 0x0;
+			TCCR4B = 0x0;
+			//resetting the TOP value:
+			OCR4A = 0x0;
+		}
 		OCR4B = 0x0; //resetting the pulse width
-		DDRH |= (0 << PH4); //bit 4 (pin 7) stop output
+		DDRH ^= (1 << PH4); //bit 4 (pin 7) stop output
 		pinActive[2] = false;
 		this->servoPin = 0;
 		}
 	else if (servoPin == 8) {
+		if(pinActive[2] == false){
+			//resetting the control register A and B:
+			TCCR4A = 0x0;
+			TCCR4B = 0x0;
+			//resetting the TOP value:
+			OCR4A = 0x0;
+		}
 		OCR4C = 0x0; //resetting the pulse width
-		DDRH |= (0 << PH5); //bit 5 (pin 8) stop output
+		DDRH ^= (1 << PH5); //bit 5 (pin 8) stop output
 		pinActive[3] = false;
 		this->servoPin = 0;
 	}
 	else if (servoPin == 44) {
+		if(pinActive[5] == false){
+			//resetting the control register A and B:
+			TCCR5A = 0x0;
+			TCCR5B = 0x0;
+			//resetting the TOP value:
+			OCR5A = 0x0;
+		}
 		OCR5C = 0x0; //resetting the pulse width
-		DDRL |= (0 << PL5); //bit 5 (pin 44) stop output
+		DDRL ^= (1 << PL5); //bit 5 (pin 44) stop output
 		pinActive[4] = false;
 		this->servoPin = 0;
 	}
 	else if (servoPin == 45) {
+		if(pinActive[4] == false){
+			//resetting the control register A and B:
+			TCCR5A = 0x0;
+			TCCR5B = 0x0;
+			//resetting the TOP value:
+			OCR5A = 0x0;
+		}
 		OCR5B = 0x0; //resetting the pulse width
-		DDRL |= (0 << PL4); //bit 4 (pin 45) stop output
+		DDRL ^= (1 << PL4); //bit 4 (pin 45) stop output
 		pinActive[5] = false;
 		this->servoPin = 0;
 	}
@@ -311,5 +353,4 @@ void Servo::writeMicroseconds(int value)
 		}
 	}
 }
-
 #endif
