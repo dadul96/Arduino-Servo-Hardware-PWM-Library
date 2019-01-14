@@ -11,8 +11,8 @@ Servo	KEYWORD1	Servo
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-attach				    KEYWORD2
-detach				    KEYWORD2
+attach  KEYWORD2
+detach  KEYWORD2
 writeMicroseconds KEYWORD2
 
 #######################################
