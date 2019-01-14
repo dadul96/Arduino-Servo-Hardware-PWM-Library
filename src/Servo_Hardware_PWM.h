@@ -1,7 +1,7 @@
 /*
-  Servo_Hardware_PWM.h - Library for using 6 Servos with fast, precise and lightweight hardware PWM.
+  Servo_Hardware_PWM.h - This Library allows Arduino/Genuino Mega boards to control up to 6 servos with the integrated 16-bit hardware PWM timer/counter.
   Created by Daniel Duller, 11. January, 2019.
-  Changed by Daniel Duller, 13. January, 2019.
+  Changed by Daniel Duller, 14. January, 2019.
 
   ###############################################################################
   MIT License
@@ -53,7 +53,7 @@
 #error "This library only supports boards with an AVR processor."
 #endif
 
-#define Servo_VERSION       0.0.3	//software version of this library
+#define Servo_VERSION       1.0.0	//software version of this library
 
 #define MIN_PULSE_WIDTH       500	//the shortest pulse sent to a servo  
 #define MAX_PULSE_WIDTH      2500	//the longest pulse sent to a servo 
