@@ -43,7 +43,7 @@
 
 	writeMicroseconds(us) --- Sets the servo pulse width in microseconds. (usable range between 500us and 2500us)
 
-	detach()    		--- Clears the used registers and stops the output of the attached pin. (no pin number needed)
+	detach()    		--- Clears the used registers and stops the output of the attached pin. (no pin number!)
 */
 
 #ifndef Servo_Hardware_PWM_h
