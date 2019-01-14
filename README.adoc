@@ -7,8 +7,7 @@ Unlike the original Servo.h library, this library does not use timer1.
 The advantage here is that when using the Wire.h library no fluctuations in the pulse width occur.
 In addition, I/O registers are addressed directly and not via the digitalWrite()-function (as in Servo.h).
 
-Possible output pins are **pin 2, 3, 7, 8, 44,** and **45**.
-**Only Arduino/Genuino Mega boards are supported!**
+Possible output pins are **pin 2, 3, 7, 8, 44,** and **45**.  **Only Arduino/Genuino Mega boards are supported!**
 
 == License ==
 
