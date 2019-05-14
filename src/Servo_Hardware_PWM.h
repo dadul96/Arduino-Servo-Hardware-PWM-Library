@@ -53,7 +53,7 @@
 #error "This library only supports boards with an AVR processor."
 #endif
 
-#define Servo_VERSION       1.0.0	//software version of this library
+#define Servo_VERSION       1.0.1	//software version of this library
 
 #define MIN_PULSE_WIDTH       500	//the shortest pulse sent to a servo  
 #define MAX_PULSE_WIDTH      2500	//the longest pulse sent to a servo 
