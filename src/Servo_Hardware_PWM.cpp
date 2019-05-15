@@ -34,7 +34,7 @@ void Servo::attach(int pin)
 			TCCR3A |= (1 << WGM31) | (1 << WGM30);
 			TCCR3B |= (1 << WGM32) | (1 << WGM33);
 
-			//setting the the TOP value:
+			//setting the TOP value:
 			OCR3A = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
 
 			//setting the output to non inverted:
@@ -62,7 +62,7 @@ void Servo::attach(int pin)
 			TCCR3A |= (1 << WGM31) | (1 << WGM30);
 			TCCR3B |= (1 << WGM32) | (1 << WGM33);
 
-			//setting the the TOP value:
+			//setting the TOP value:
 			OCR3A = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
 
 			//setting the output to non inverted:
@@ -90,7 +90,7 @@ void Servo::attach(int pin)
 			TCCR4A |= (1 << WGM41) | (1 << WGM40);
 			TCCR4B |= (1 << WGM42) | (1 << WGM43);
 
-			//setting the the TOP value:
+			//setting the TOP value:
 			OCR4A = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
 
 			//setting the output to non inverted:
@@ -118,7 +118,7 @@ void Servo::attach(int pin)
 			TCCR4A |= (1 << WGM41) | (1 << WGM40);
 			TCCR4B |= (1 << WGM42) | (1 << WGM43);
 
-			//setting the the TOP value:
+			//setting the TOP value:
 			OCR4A = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
 
 			//setting the output to non inverted:
@@ -146,7 +146,7 @@ void Servo::attach(int pin)
 			TCCR5A |= (1 << WGM51) | (1 << WGM50);
 			TCCR5B |= (1 << WGM52) | (1 << WGM53);
 
-			//setting the the TOP value:
+			//setting the TOP value:
 			OCR5A = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
 
 			//setting the output to non inverted:
@@ -174,7 +174,7 @@ void Servo::attach(int pin)
 			TCCR5A |= (1 << WGM51) | (1 << WGM50);
 			TCCR5B |= (1 << WGM52) | (1 << WGM53);
 
-			//setting the the TOP value:
+			//setting the TOP value:
 			OCR5A = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
 
 			//setting the output to non inverted:
