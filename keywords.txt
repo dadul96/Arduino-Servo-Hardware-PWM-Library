@@ -11,10 +11,11 @@ Servo	KEYWORD1	Servo
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-attach  KEYWORD2
-detach  KEYWORD2
-write	KEYWORD2
-writeMicroseconds KEYWORD2
+attach             KEYWORD2
+detach             KEYWORD2
+detachAll          KEYWORD2
+write              KEYWORD2
+writeMicroseconds  KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

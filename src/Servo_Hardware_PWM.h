@@ -68,6 +68,7 @@ public:
 	Servo();
 	void attach(int pin);				//attach the given pin
 	void detach();						//detach the used pin
+	void detachAll();					//automatically detaches all used pins
 	void write(int value);				//write angle in degrees
 	void writeMicroseconds(int value);	//write pulse width in microseconds 
 private:
