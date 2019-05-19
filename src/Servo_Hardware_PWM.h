@@ -49,6 +49,8 @@
 #ifndef Servo_Hardware_PWM_h
 #define Servo_Hardware_PWM_h
 
+#include <inttypes.h>
+
 #if !defined(ARDUINO_ARCH_AVR)
 #error "This library only supports boards with an AVR processor."
 #endif
@@ -61,19 +63,20 @@
 #define MAX_TIMER_COUNT		40000	//the timer TOP value (for creating 50Hz)
 
 #define MAX_SERVOS				6	//6 Servos can be attached
+#define INVALID_SERVO_NUMBER  255	//flag indicating an invalid servo index
 
 class Servo
 {
 public:
 	Servo();
-	void attach(int pin);				//attach the given pin
+	uint8_t attach(int pin);			//attach the given pin; returns servoIndex number or 255 if too many servos
 	void detach();						//detach the used pin
 	void detachAll();					//automatically detaches all used pins
 	void write(int value);				//write angle in degrees
 	void writeMicroseconds(int value);	//write pulse width in microseconds 
 private:
-	int servoIndex = 0;					//number of attached Servos
-	int servoPin = 0;					//pin number of the attached Servo
+	uint8_t servoIndex;					//number of attached Servos
+	uint8_t servoPin;					//pin number of the attached Servo
 };
 
 #endif
