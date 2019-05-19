@@ -7,8 +7,8 @@ For information about the library, license and author, see Servo_Hardware_PWM.h 
 #include <Arduino.h>
 #include <Servo_Hardware_PWM.h>
 
-int servoCount = 0;
-bool pinActive[MAX_SERVOS] = {false};
+static int servoCount = 0;
+static bool pinActive[MAX_SERVOS] = {false};
 
 Servo::Servo()
 {
