@@ -287,6 +287,7 @@ void Servo::write(int value)
 
 	this->writeMicroseconds(value);
 }
+
 void Servo::writeMicroseconds(int value)
 {
 	if ((this->servoIndex < MAX_SERVOS)) {
