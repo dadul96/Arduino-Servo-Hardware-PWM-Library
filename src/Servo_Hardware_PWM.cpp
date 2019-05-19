@@ -273,6 +273,81 @@ void Servo::detach()
 	}
 }
 
+void Servo::detachAll() {
+	if (pinActive[0] == true)
+	{
+		//resetting the control register A and B:
+		TCCR3A = 0x0;
+		TCCR3B = 0x0;
+		//resetting the TOP value:
+		OCR3A = 0x0;
+
+		OCR3B = 0x0; //resetting the pulse width
+		DDRE ^= (1 << PE4); //bit 4 (pin 2) stop output
+		pinActive[0] = false;
+	}
+	if (pinActive[1] == true)
+	{
+		//resetting the control register A and B:
+		TCCR3A = 0x0;
+		TCCR3B = 0x0;
+		//resetting the TOP value:
+		OCR3A = 0x0;
+
+		OCR3C = 0x0; //resetting the pulse width
+		DDRE ^= (1 << PE5); //bit 5 (pin 3) stop output
+		pinActive[1] = false;
+	}
+	if (pinActive[2] == true)
+	{
+		//resetting the control register A and B:
+		TCCR4A = 0x0;
+		TCCR4B = 0x0;
+		//resetting the TOP value:
+		OCR4A = 0x0;
+
+		OCR4B = 0x0; //resetting the pulse width
+		DDRH ^= (1 << PH4); //bit 4 (pin 7) stop output
+		pinActive[2] = false;
+	}
+	if (pinActive[3] == true)
+	{
+		//resetting the control register A and B:
+		TCCR4A = 0x0;
+		TCCR4B = 0x0;
+		//resetting the TOP value:
+		OCR4A = 0x0;
+
+		OCR4C = 0x0; //resetting the pulse width
+		DDRH ^= (1 << PH5); //bit 5 (pin 8) stop output
+		pinActive[3] = false;
+	}
+	if (pinActive[4] == true)
+	{
+		//resetting the control register A and B:
+		TCCR5A = 0x0;
+		TCCR5B = 0x0;
+		//resetting the TOP value:
+		OCR5A = 0x0;
+
+		OCR5C = 0x0; //resetting the pulse width
+		DDRL ^= (1 << PL5); //bit 5 (pin 44) stop output
+		pinActive[4] = false;
+	}
+	if (pinActive[5] == true)
+	{
+		//resetting the control register A and B:
+		TCCR5A = 0x0;
+		TCCR5B = 0x0;
+		//resetting the TOP value:
+		OCR5A = 0x0;
+
+		OCR5B = 0x0; //resetting the pulse width
+		DDRL ^= (1 << PL4); //bit 4 (pin 45) stop output
+		pinActive[5] = false;
+	}
+}
+
 void Servo::write(int value) 
 {
 	if (value < 0)
@@ -297,27 +372,27 @@ void Servo::writeMicroseconds(int value)
 		else if (value > MAX_PULSE_WIDTH) {
 			value = MAX_PULSE_WIDTH;
 		}
-		if (this->servoPin == 2) {
+		if (this->servoPin == 2 && pinActive[0] == true) {
 			OCR3B = 0x0;
 			OCR3B = value * 2;
 		}
-		else if (this->servoPin == 3) {
+		else if (this->servoPin == 3 && pinActive[1] == true) {
 			OCR3C = 0x0;
 			OCR3C = value * 2;
 		}
-		else if (this->servoPin == 7) {
+		else if (this->servoPin == 7 && pinActive[2] == true) {
 			OCR4B = 0x0;
 			OCR4B = value * 2;
 		}
-		else if (this->servoPin == 8) {
+		else if (this->servoPin == 8 && pinActive[3] == true) {
 			OCR4C = 0x0;
 			OCR4C = value * 2;
 		}
-		else if (this->servoPin == 44) {
+		else if (this->servoPin == 44 && pinActive[4] == true) {
 			OCR5C = 0x0;
 			OCR5C = value * 2;
 		}
-		else if (this->servoPin == 45) {
+		else if (this->servoPin == 45 && pinActive[5] == true) {
 			OCR5B = 0x0;
 			OCR5B = value * 2;
 		}
