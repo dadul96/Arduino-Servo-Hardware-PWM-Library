@@ -273,6 +273,20 @@ void Servo::detach()
 	}
 }
 
+void Servo::write(int value) 
+{
+	if (value < 0)
+	{
+		value = 0;
+	}
+	else if (value > 180)
+	{
+		value = 180;
+	}
+	value = map(value, 0, 180, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH);
+
+	this->writeMicroseconds(value);
+}
 
 void Servo::writeMicroseconds(int value)
 {
