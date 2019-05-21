@@ -29,6 +29,20 @@ Servo::Servo()
 
 uint8_t Servo::attach(int pin)
 {
+	return this->attach(pin, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH, DEFAULT_PULSE_WIDTH);
+}
+
+uint8_t Servo::attach(int pin, int min, int max)
+{
+	return this->attach(pin, min, max, DEFAULT_PULSE_WIDTH);
+}
+
+uint8_t Servo::attach(int pin, int min, int max, int defaultPos)
+{
+	this->min = min;
+	this->max = max;
+	this->defaultPos = defaultPos;
+
 	if (this->servoIndex < MAX_SERVOS) {
 		if (pin == 2) {
 			if(pinActive[1] == BOOL_FALSE){
@@ -50,7 +64,7 @@ uint8_t Servo::attach(int pin)
 			//setting the output to non inverted:
 			TCCR3A |= (1 << COM3B1);
 
-			OCR3B = DEFAULT_PULSE_WIDTH; //setting the pulse width
+			OCR3B = this->defaultPos; //setting the pulse width
 
 			//OC3B, Port E, Bit 4; setting pin 2 as output:
 			DDRE |= (1 << PE4); //bit 4 (pin 2) as output  
@@ -78,7 +92,7 @@ uint8_t Servo::attach(int pin)
 			//setting the output to non inverted:
 			TCCR3A |= (1 << COM3C1);
 
-			OCR3C = DEFAULT_PULSE_WIDTH; //setting the pulse width
+			OCR3C = this->defaultPos; //setting the pulse width
 
 			//OC3C, Port E, Bit 5; setting pin 3 as output:
 			DDRE |= (1 << PE5); //bit 5 (pin 3) as output  
@@ -106,7 +120,7 @@ uint8_t Servo::attach(int pin)
 			//setting the output to non inverted:
 			TCCR4A |= (1 << COM4B1);
 
-			OCR4B = DEFAULT_PULSE_WIDTH; //setting the pulse width
+			OCR4B = this->defaultPos; //setting the pulse width
 
 			//OC4B, Port H, Bit 4; setting pin 7 as output:
 			DDRH |= (1 << PH4); //bit 4 (pin 7) as output  
@@ -134,7 +148,7 @@ uint8_t Servo::attach(int pin)
 			//setting the output to non inverted:
 			TCCR4A |= (1 << COM4C1);
 
-			OCR4C = DEFAULT_PULSE_WIDTH; //setting the pulse width
+			OCR4C = this->defaultPos; //setting the pulse width
 
 			//OC4C, Port H, Bit 5; setting pin 8 as output:
 			DDRH |= (1 << PH5); //bit 5 (pin 8) as output  
@@ -162,7 +176,7 @@ uint8_t Servo::attach(int pin)
 			//setting the output to non inverted:
 			TCCR5A |= (1 << COM5C1);
 
-			OCR5C = DEFAULT_PULSE_WIDTH; //setting the pulse width
+			OCR5C = this->defaultPos; //setting the pulse width
 
 			//OC5C, Port L, Bit 5; setting pin 44 as output:
 			DDRL |= (1 << PL5); //bit 5 (pin 44) as output
@@ -190,7 +204,7 @@ uint8_t Servo::attach(int pin)
 			//setting the output to non inverted:
 			TCCR5A |= (1 << COM5B1);
 
-			OCR5B = DEFAULT_PULSE_WIDTH; //setting the pulse width
+			OCR5B = this->defaultPos; //setting the pulse width
 
 			//OC5B, Port L, Bit 4; setting pin 45 as output:
 			DDRL |= (1 << PL4); //bit 4 (pin 45) as output
@@ -370,7 +384,7 @@ void Servo::write(int value)
 	{
 		value = 180;
 	}
-	value = (((MAX_PULSE_WIDTH - MIN_PULSE_WIDTH) * value) / 180) + MIN_PULSE_WIDTH;
+	value = (((this->max - this->min) * value) / 180) + this->min;
 
 	this->writeMicroseconds(value);
 }
@@ -378,11 +392,11 @@ void Servo::write(int value)
 void Servo::writeMicroseconds(int value)
 {
 	if ((this->servoIndex < MAX_SERVOS)) {
-		if (value < MIN_PULSE_WIDTH) {
-			value = MIN_PULSE_WIDTH;
+		if (value < this->min) {
+			value = this->min;
 		}
-		else if (value > MAX_PULSE_WIDTH) {
-			value = MAX_PULSE_WIDTH;
+		else if (value > this->max) {
+			value = this->max;
 		}
 		if (this->servoPin == 2 && pinActive[0] == BOOL_TRUE) {
 			OCR3B = 0x0;
