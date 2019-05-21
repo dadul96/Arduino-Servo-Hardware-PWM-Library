@@ -27,12 +27,12 @@ Servo::Servo()
 	}
 }
 
-uint8_t Servo::attach(int pin) 
+uint8_t Servo::attach(int pin)
 {
 	return this->attach(pin, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH, DEFAULT_PULSE_WIDTH);
 }
 
-uint8_t Servo::attach(int pin, int min, int max) 
+uint8_t Servo::attach(int pin, int min, int max)
 {
 	return this->attach(pin, min, max, DEFAULT_PULSE_WIDTH);
 }

@@ -79,9 +79,9 @@ public:
 private:
 	uint8_t servoIndex;										//number of attached Servos
 	uint8_t servoPin;										//pin number of the attached Servo
-	uint8_t min;											//lower pulse width limit
-	uint8_t max;											//upper pulse width limit
-	uint8_t defaultPos;										//pulse width when servo is attached
+	uint16_t min;											//lower pulse width limit
+	uint16_t max;											//upper pulse width limit
+	uint16_t defaultPos;									//pulse width when servo is attached
 };
 
 #endif
