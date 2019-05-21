@@ -69,17 +69,19 @@ class Servo
 {
 public:
 	Servo();
-	uint8_t attach(int pin);					//attach the given pin; returns servoIndex number or 255 if too many servos
-	uint8_t attach(int pin, int min, int max);	//attach the given pin and set the upper and lower pulse width limits; returns servoIndex number or 255 if too many servos
-	void detach();								//detach the used pin
-	void detachAll();							//automatically detaches all used pins
-	void write(int value);						//write angle in degrees
-	void writeMicroseconds(int value);			//write pulse width in microseconds 
+	uint8_t attach(int pin);								//attach the given pin; returns servoIndex number or 255 if too many servos
+	uint8_t attach(int pin, int min, int max);				//attach the given pin and set the upper and lower pulse width limits; returns servoIndex number or 255 if too many servos
+	uint8_t attach(int pin, int min, int max, int default);	//attach the given pin, set the upper and lower pulse width limits and set the pulse width when servo is attached; returns servoIndex number or 255 if too many servos
+	void detach();											//detach the used pin
+	void detachAll();										//automatically detaches all used pins
+	void write(int value);									//write angle in degrees
+	void writeMicroseconds(int value);						//write pulse width in microseconds 
 private:
-	uint8_t servoIndex;							//number of attached Servos
-	uint8_t servoPin;							//pin number of the attached Servo
-	uint8_t min;								//lower pulse width limit
-	uint8_t max;								//upper pulse width limit
+	uint8_t servoIndex;										//number of attached Servos
+	uint8_t servoPin;										//pin number of the attached Servo
+	uint8_t min;											//lower pulse width limit
+	uint8_t max;											//upper pulse width limit
+	uint8_t default;										//pulse width when servo is attached
 };
 
 #endif
