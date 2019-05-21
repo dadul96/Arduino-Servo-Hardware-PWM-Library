@@ -27,8 +27,16 @@ Servo::Servo()
 	}
 }
 
-uint8_t Servo::attach(int pin)
+uint8_t Servo::attach(int pin) 
 {
+	return this->attach(pin, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH);
+}
+
+uint8_t Servo::attach(int pin, int min, int max)
+{
+	this->min = min;
+	this->max = max;
+
 	if (this->servoIndex < MAX_SERVOS) {
 		if (pin == 2) {
 			if(pinActive[1] == BOOL_FALSE){
@@ -370,7 +378,7 @@ void Servo::write(int value)
 	{
 		value = 180;
 	}
-	value = (((MAX_PULSE_WIDTH - MIN_PULSE_WIDTH) * value) / 180) + MIN_PULSE_WIDTH;
+	value = (((this->max - this->min) * value) / 180) + this->min;
 
 	this->writeMicroseconds(value);
 }
@@ -378,11 +386,11 @@ void Servo::write(int value)
 void Servo::writeMicroseconds(int value)
 {
 	if ((this->servoIndex < MAX_SERVOS)) {
-		if (value < MIN_PULSE_WIDTH) {
-			value = MIN_PULSE_WIDTH;
+		if (value < this->min) {
+			value = this->min;
 		}
-		else if (value > MAX_PULSE_WIDTH) {
-			value = MAX_PULSE_WIDTH;
+		else if (value > this->max) {
+			value = this->max;
 		}
 		if (this->servoPin == 2 && pinActive[0] == BOOL_TRUE) {
 			OCR3B = 0x0;
