@@ -398,30 +398,44 @@ void Servo::writeMicroseconds(int value)
 		else if (value > this->max) {
 			value = this->max;
 		}
+		this->pulseWidth = value;
+
 		if (this->servoPin == 2 && pinActive[0] == BOOL_TRUE) {
 			OCR3B = 0x0;
-			OCR3B = value * 2;
+			OCR3B = this->pulseWidth * 2;
 		}
 		else if (this->servoPin == 3 && pinActive[1] == BOOL_TRUE) {
 			OCR3C = 0x0;
-			OCR3C = value * 2;
+			OCR3C = this->pulseWidth * 2;
 		}
 		else if (this->servoPin == 7 && pinActive[2] == BOOL_TRUE) {
 			OCR4B = 0x0;
-			OCR4B = value * 2;
+			OCR4B = this->pulseWidth * 2;
 		}
 		else if (this->servoPin == 8 && pinActive[3] == BOOL_TRUE) {
 			OCR4C = 0x0;
-			OCR4C = value * 2;
+			OCR4C = this->pulseWidth * 2;
 		}
 		else if (this->servoPin == 44 && pinActive[4] == BOOL_TRUE) {
 			OCR5C = 0x0;
-			OCR5C = value * 2;
+			OCR5C = this->pulseWidth * 2;
 		}
 		else if (this->servoPin == 45 && pinActive[5] == BOOL_TRUE) {
 			OCR5B = 0x0;
-			OCR5B = value * 2;
+			OCR5B = this->pulseWidth * 2;
 		}
 	}
+}
+
+int read() 
+{
+	int angle;
+	angle = (((180 * (this->readMicroseconds() - this->min)) / (this->max - this->min));
+	return angle;
+}
+
+int readMicroseconds() 
+{
+	return this->pulseWidth;
 }
 #endif
