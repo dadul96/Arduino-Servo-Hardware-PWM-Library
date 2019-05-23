@@ -427,15 +427,19 @@ void Servo::writeMicroseconds(int value)
 	}
 }
 
-int read() 
-{
+
+int Servo::read() {
 	int angle;
-	angle = (((180 * (this->readMicroseconds() - this->min)) / (this->max - this->min));
+	angle = ((180 * (this->readMicroseconds() - this->min)) / (this->max - this->min));
 	return angle;
 }
 
-int readMicroseconds() 
-{
+int Servo::readMicroseconds() {
+	if (this->servoIndex == INVALID_SERVO_NUMBER)
+	{
+		this->pulseWidth = 0;
+	}
+
 	return this->pulseWidth;
 }
 #endif
