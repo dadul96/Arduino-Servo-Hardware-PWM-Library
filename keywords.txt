@@ -16,6 +16,8 @@ detach             KEYWORD2
 detachAll          KEYWORD2
 write              KEYWORD2
 writeMicroseconds  KEYWORD2
+read               KEYWORD2
+readMicroseconds   KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
