@@ -376,16 +376,24 @@ void Servo::detachAll() {
 
 void Servo::write(int value) 
 {
-	if (value < 0)
-	{
-		value = 0;
-	}
-	else if (value > 180)
-	{
-		value = 180;
-	}
-	value = (((this->max - this->min) * value) / 180) + this->min;
+	float tempValue;
 
+	if (value <= 0)
+	{
+		tempValue = 0.0;
+	}
+	else if (value >= 180)
+	{
+		tempValue = 180.0;
+	}
+	else
+	{
+		tempValue = (float)value;
+	}
+
+	tempValue = (((this->max - this->min) * tempValue) / 180.0) + this->min;
+
+	value = (int)tempValue;
 	this->writeMicroseconds(value);
 }
 
@@ -426,7 +434,6 @@ void Servo::writeMicroseconds(int value)
 		}
 	}
 }
-
 
 int Servo::read() {
 	float angle;
