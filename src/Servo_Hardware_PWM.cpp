@@ -376,16 +376,24 @@ void Servo::detachAll() {
 
 void Servo::write(int value) 
 {
-	if (value < 0)
-	{
-		value = 0;
-	}
-	else if (value > 180)
-	{
-		value = 180;
-	}
-	value = (((this->max - this->min) * value) / 180) + this->min;
+	float tempValue;
 
+	if (value <= 0)
+	{
+		tempValue = 0.0;
+	}
+	else if (value >= 180)
+	{
+		tempValue = 180.0;
+	}
+	else
+	{
+		tempValue = (float)value;
+	}
+
+	tempValue = (((this->max - this->min) * tempValue) / 180.0) + this->min;
+
+	value = (int)tempValue;
 	this->writeMicroseconds(value);
 }
 
@@ -398,30 +406,56 @@ void Servo::writeMicroseconds(int value)
 		else if (value > this->max) {
 			value = this->max;
 		}
+		this->pulseWidth = value;
+
 		if (this->servoPin == 2 && pinActive[0] == BOOL_TRUE) {
 			OCR3B = 0x0;
-			OCR3B = value * 2;
+			OCR3B = this->pulseWidth * 2;
 		}
 		else if (this->servoPin == 3 && pinActive[1] == BOOL_TRUE) {
 			OCR3C = 0x0;
-			OCR3C = value * 2;
+			OCR3C = this->pulseWidth * 2;
 		}
 		else if (this->servoPin == 7 && pinActive[2] == BOOL_TRUE) {
 			OCR4B = 0x0;
-			OCR4B = value * 2;
+			OCR4B = this->pulseWidth * 2;
 		}
 		else if (this->servoPin == 8 && pinActive[3] == BOOL_TRUE) {
 			OCR4C = 0x0;
-			OCR4C = value * 2;
+			OCR4C = this->pulseWidth * 2;
 		}
 		else if (this->servoPin == 44 && pinActive[4] == BOOL_TRUE) {
 			OCR5C = 0x0;
-			OCR5C = value * 2;
+			OCR5C = this->pulseWidth * 2;
 		}
 		else if (this->servoPin == 45 && pinActive[5] == BOOL_TRUE) {
 			OCR5B = 0x0;
-			OCR5B = value * 2;
+			OCR5B = this->pulseWidth * 2;
 		}
 	}
+}
+
+int Servo::read() {
+	float angle;
+
+	if ((this->readMicroseconds() - this->min) <= 0)
+	{
+		angle = 0.0;
+	}
+	else
+	{
+		angle = (180.0 / (this->max - this->min)) * (this->readMicroseconds() - this->min);
+	}
+
+	return (int)angle;
+}
+
+int Servo::readMicroseconds() {
+	if (this->servoIndex == INVALID_SERVO_NUMBER)
+	{
+		this->pulseWidth = 0;
+	}
+
+	return this->pulseWidth;
 }
 #endif
