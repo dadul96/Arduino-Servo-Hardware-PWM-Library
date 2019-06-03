@@ -429,9 +429,18 @@ void Servo::writeMicroseconds(int value)
 
 
 int Servo::read() {
-	int angle;
-	angle = ((180 * (this->readMicroseconds() - this->min)) / (this->max - this->min));
-	return angle;
+	float angle;
+
+	if ((this->readMicroseconds() - this->min) <= 0)
+	{
+		angle = 0.0;
+	}
+	else
+	{
+		angle = (180.0 / (this->max - this->min)) * (this->readMicroseconds() - this->min);
+	}
+
+	return (int)angle;
 }
 
 int Servo::readMicroseconds() {
