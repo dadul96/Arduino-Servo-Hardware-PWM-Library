@@ -78,6 +78,7 @@ public:
 	void writeMicroseconds(int value);							//write pulse width in microseconds
 	int read();													//returns the current write angle in degrees
 	int readMicroseconds();										//returns the current write angle in microseconds
+	bool attached();											//returns true if this servo is attached, otherwise false 
 
 private:
 	uint8_t servoIndex;											//number of attached Servos
