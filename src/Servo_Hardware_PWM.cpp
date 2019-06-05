@@ -458,4 +458,8 @@ int Servo::readMicroseconds() {
 
 	return this->pulseWidth;
 }
+
+bool Servo::attached() {
+	return pinActive[this->servoIndex] == BOOL_TRUE;
+}
 #endif
