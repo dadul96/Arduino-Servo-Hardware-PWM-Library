@@ -18,6 +18,7 @@ write	KEYWORD2
 writeMicroseconds	KEYWORD2
 read	KEYWORD2
 readMicroseconds	KEYWORD2
+attached	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
