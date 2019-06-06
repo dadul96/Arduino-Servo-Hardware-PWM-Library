@@ -27,14 +27,14 @@
   SOFTWARE.
   ###############################################################################
 
-  
+
   #########################################################
   Only works on pin 2, 3, 7, 8, 44, and 45 on Arduino Mega!
   #########################################################
 			Tested on Arduino Mega 2560 R3.
   #########################################################
 
-  
+
   The methods are:
 
 	Servo 				--- Class for manipulating servo motors connected to Arduino pins. (max. 6 elements)
@@ -65,8 +65,7 @@
 #define MAX_SERVOS				6	//6 Servos can be attached
 #define INVALID_SERVO_NUMBER  255	//flag indicating an invalid servo index
 
-class Servo
-{
+class Servo {
 public:
 	Servo();
 	uint8_t attach(int pin);									//attach the given pin; returns servoIndex number or 255 if too many servos
