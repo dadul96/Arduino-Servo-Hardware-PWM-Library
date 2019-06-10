@@ -1,4 +1,4 @@
-= Servo Hardware PWM Library for Arduino Mega =
+# Servo Hardware PWM Library for Arduino Mega
 
 This library allows Arduino/Genuino Mega boards to control up to **6 servos** with the integrated **16-bit hardware PWM timer/counter**.
 This library uses the 16-bit hardware timer/counter (timer3, timer4 and timer5) to control the servos.
@@ -10,7 +10,7 @@ In addition, I/O registers are addressed directly and not via the digitalWrite()
 Possible output pins are **pin 2, 3, 7, 8, 44,** and **45**. 
 **Only Arduino/Genuino Mega boards are supported!**
 
-== License ==
+## License
 
 MIT License
 
