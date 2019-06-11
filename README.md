@@ -10,26 +10,23 @@ In addition, I/O registers are addressed directly and not via the digitalWrite()
 Possible output pins are **pin 2, 3, 7, 8, 44,** and **45**. 
 **Only Arduino/Genuino Mega boards are supported!**
 
-## License
+### Installation
+This library can be installed through the Arduino IDE library manager like so:
+![](installation.gif)
 
-MIT License
+### Note
+The Servo-Library was build to be compatible with all the [original Arduino Servo Library](https://github.com/arduino-libraries/Servo) - commands available.
 
-Copyright (c) 2019 Daniel Duller
+### Built With
+* [Visual Studio 2019](https://visualstudio.microsoft.com/) - IDE used for programming
+* [Arduino IDE](https://www.arduino.cc/en/Main/Software) - IDE used for programming and testing
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+### Author
+**Daniel Duller** - [dadul96](https://github.com/dadul96)
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+### License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+### Acknowledgments
+* Inspired by - [original Arduino Servo Library](https://github.com/arduino-libraries/Servo)
+* Screen-GIF recorded with - [ShareX](https://getsharex.com/)
