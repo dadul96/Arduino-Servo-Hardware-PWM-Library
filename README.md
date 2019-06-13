@@ -29,4 +29,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Acknowledgments
 * Inspired by - [original Arduino Servo Library](https://github.com/arduino-libraries/Servo)
+* Thanks for helping me to improve my library - [per1234](https://github.com/per1234)
 * Screen-GIF recorded with - [ShareX](https://getsharex.com/)
