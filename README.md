@@ -16,8 +16,8 @@ This library can be installed through the Arduino IDE library manager like so:
 
 ### Note
 Starting from version 1.2.0 this Servo-Library is compatible with all the [original Arduino Servo Library](https://github.com/arduino-libraries/Servo) - commands available. Besides that, following functions are added:
-* attach(int pin, int min, int max, int defaultPos);
-* detachAll();
+* ```attach(int pin, int min, int max, int defaultPos);```
+* ```detachAll()```;
 
 ### Built With
 * [Visual Studio 2019](https://visualstudio.microsoft.com/) - IDE used for programming
