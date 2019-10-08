@@ -18,6 +18,6 @@ The functions of the library are:
 
 **read()** -- Returns the current angle (in degrees) that gets transmitted to the servo. (return datatype: **int**)
 
-**readMicroseconds()** -- Returns the current angle (in microseconds) that gets transmitted to the servo. (return datatype: **int**)
+**readMicroseconds()** -- Returns the current angle (in microseconds) that gets transmitted to the servo. (return type: **int**)
 
-**attached()** -- Returns **true** if the servo is attached, otherwise the return value is **false**. (return datatype: **bool**)
+**attached()** -- Returns **true** if the servo is attached, otherwise the return value is **false**. (return type: **bool**)
