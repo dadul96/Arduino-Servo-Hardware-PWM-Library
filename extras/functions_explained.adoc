@@ -16,7 +16,7 @@ The functions of the library are:
 
 **writeMicroseconds(us)** -- Sets the servo pulse width in microseconds. (standard usable range between **500**us and **2500**us)
 
-**read()** -- Returns the current angle (in degrees) that gets transmitted to the servo. (return datatype: **int**)
+**read()** -- Returns the current angle (in degrees) that gets transmitted to the servo. (return type: **int**)
 
 **readMicroseconds()** -- Returns the current angle (in microseconds) that gets transmitted to the servo. (return type: **int**)
 
