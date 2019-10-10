@@ -37,13 +37,29 @@
 
   The methods are:
 
-	Servo 				--- Class for manipulating servo motors connected to Arduino pins. (max. 6 elements)
+	Servo 								---		Class for manipulating servo motors connected to Arduino pins. (max. 6 elements)
 
-	attach(pin)  		--- Attaches a servo motor to an i/o pin. (only pin 2, 3, 7, 8, 44, and 45)
+	attach(pin)  						---		Attaches a servo motor to an i/o pin. (only pin 2, 3, 7, 8, 44, and 45)
 
-	writeMicroseconds(us) --- Sets the servo pulse width in microseconds. (usable range between 500us and 2500us)
+	attach(pin, min, max)  				---		Attaches a servo motor to an i/o pin with a custom lower and upper pulse width limit.
 
-	detach()    		--- Clears the used registers and stops the output of the attached pin. (no pin number!)
+	attach(pin, min, max, defaultPos)  	---		Attaches a servo motor to an i/o pin with a custom lower and upper pulse width limit. 
+												In addition, the starting pulse width of the servo can bes set with the defaultPos. 
+												This allows the servo to start from a user-defined angle instead of the middle position.
+
+	detach()    						---		Clears the used registers and stops the output of the attached pin. (no pin number!)
+
+	detachAll()    						---		Clears the used registers and stops the output of ALL attached pins. (no pin number!)
+
+	write(degrees)						---		Sets the servo angle in degrees. (usable range between 0° and 180°)
+
+	writeMicroseconds(us)				---		Sets the servo pulse width in microseconds. (usable range between 500us and 2500us)
+
+	read()								---		Returns the current angle (in degrees) that gets transmitted to the servo. (return type: int)
+
+	readMicroseconds()					---		Returns the current angle (in microseconds) that gets transmitted to the servo. (return type: int)
+
+	attached()							---		Returns true if the servo is attached. (return type: bool)
 */
 
 #ifndef Servo_Hardware_PWM_h
