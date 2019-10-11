@@ -38,7 +38,7 @@ uint8_t Servo::attach(int pin, int min, int max) {
 uint8_t Servo::attach(int pin, int min, int max, int defaultPos) {
 	this->min = min;
 	this->max = max;
-	this->defaultPos = defaultPos;
+	this->defaultPos = defaultPos * 2;
 
 	if (this->servoIndex < MAX_SERVOS)
 	{

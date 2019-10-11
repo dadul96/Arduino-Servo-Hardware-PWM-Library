@@ -75,7 +75,7 @@
 
 #define MIN_PULSE_WIDTH       500	//the shortest pulse sent to a servo  
 #define MAX_PULSE_WIDTH      2500	//the longest pulse sent to a servo 
-#define DEFAULT_PULSE_WIDTH     0	//default pulse width when servo is attached
+#define DEFAULT_PULSE_WIDTH  1500	//default pulse width when servo is attached
 #define MAX_TIMER_COUNT		40000	//the timer TOP value (for creating 50Hz)
 
 #define MAX_SERVOS				6	//6 Servos can be attached
