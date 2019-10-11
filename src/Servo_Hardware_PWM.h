@@ -44,7 +44,7 @@
 	attach(pin, min, max)  				---		Attaches a servo motor to an i/o pin with a custom lower and upper pulse width limit.
 
 	attach(pin, min, max, defaultPos)  	---		Attaches a servo motor to an i/o pin with a custom lower and upper pulse width limit. 
-												In addition, the starting pulse width of the servo can bes set with the defaultPos. 
+												In addition, the starting pulse width of the servo can be set with the defaultPos. 
 												This allows the servo to start from a user-defined angle instead of the middle position.
 
 	detach()    						---		Clears the used registers and stops the output of the attached pin. (no pin number!)
