@@ -1,5 +1,6 @@
 /* Servo Sweep
- by Daniel Duller 12. January 2019
+ Created by Daniel Duller, 12. January, 2019.
+ Changed by Daniel Duller, 11. October, 2019.
  This example code is in the public domain.
 */
 
