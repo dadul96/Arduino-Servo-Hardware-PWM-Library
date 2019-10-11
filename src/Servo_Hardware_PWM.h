@@ -1,7 +1,7 @@
 /*
   Servo_Hardware_PWM.h - This Library allows Arduino/Genuino Mega boards to control up to 6 servos with the integrated 16-bit hardware PWM timer/counter.
   Created by Daniel Duller, 11. January, 2019.
-  Changed by Daniel Duller, 14. January, 2019.
+  Changed by Daniel Duller, 11. October, 2019.
 
   ###############################################################################
   MIT License
@@ -44,7 +44,7 @@
 	attach(pin, min, max)  				---		Attaches a servo motor to an i/o pin with a custom lower and upper pulse width limit.
 
 	attach(pin, min, max, defaultPos)  	---		Attaches a servo motor to an i/o pin with a custom lower and upper pulse width limit. 
-												In addition, the starting pulse width of the servo can bes set with the defaultPos. 
+												In addition, the starting pulse width of the servo can be set with the defaultPos. 
 												This allows the servo to start from a user-defined angle instead of the middle position.
 
 	detach()    						---		Clears the used registers and stops the output of the attached pin. (no pin number!)
@@ -71,11 +71,11 @@
 #error "This library only supports boards with an AVR processor."
 #endif
 
-#define VERSION             1.0.1	//software version of this library
+#define Servo_VERSION       1.0.1	//software version of this library
 
 #define MIN_PULSE_WIDTH       500	//the shortest pulse sent to a servo  
 #define MAX_PULSE_WIDTH      2500	//the longest pulse sent to a servo 
-#define DEFAULT_PULSE_WIDTH     0	//default pulse width when servo is attached
+#define DEFAULT_PULSE_WIDTH  1500	//default pulse width when servo is attached
 #define MAX_TIMER_COUNT		40000	//the timer TOP value (for creating 50Hz)
 
 #define MAX_SERVOS				6	//6 Servos can be attached
