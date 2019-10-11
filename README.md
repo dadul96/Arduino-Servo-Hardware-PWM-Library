@@ -16,7 +16,7 @@ This library can be installed through the Arduino IDE library manager like so:
 
 ### Note
 Starting from version 1.2.0 this Servo-Library is compatible with all the [original Arduino Servo Library](https://github.com/arduino-libraries/Servo) - commands available. In addition to these "standard"-functions, following commands are added:
-* ``` attach(int pin, int min, int max, int defaultPos)``` - Besides the ability of setting the servo pin and the upper and lower pulse width limit, the starting pulse width of the servo can be set with the defaultPos. This allows the servo to start from a user-defined angle instead of the middle position.
+* ``` attach(int pin, int min, int max, int defaultPos)``` - Besides the ability to set the servo pin and the upper and lower pulse width limit, the starting pulse width of the servo can be set with the defaultPos. This allows the servo to start from a user-defined angle instead of the middle position.
 * ```detachAll()``` - This feature allows detaching all servos at once.
 
 ### Built With
