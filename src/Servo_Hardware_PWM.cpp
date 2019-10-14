@@ -2,7 +2,7 @@
 For information about the library, license and author, see Servo_Hardware_PWM.h - file.
 */
 
-#if defined(ARDUINO_ARCH_AVR)
+#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
 
 #include <Arduino.h>
 #include <Servo_Hardware_PWM.h>

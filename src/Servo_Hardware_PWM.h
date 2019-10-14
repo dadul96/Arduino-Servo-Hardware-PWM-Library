@@ -1,7 +1,7 @@
 /*
   Servo_Hardware_PWM.h - This Library allows Arduino/Genuino Mega boards to control up to 6 servos with the integrated 16-bit hardware PWM timer/counter.
   Created by Daniel Duller, 11. January, 2019.
-  Changed by Daniel Duller, 11. October, 2019.
+  Changed by Daniel Duller, 14. October, 2019.
 
   ###############################################################################
   MIT License
@@ -67,11 +67,13 @@
 
 #include <inttypes.h>
 
-#if !defined(ARDUINO_ARCH_AVR)
-#error "This library only supports boards with an AVR processor."
+#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
+#warning "INFO: Servos can only be connected to the following pins: 2, 3, 7, 8, 44, and 45"
+#else
+#error "ERROR: This library only supports boards with an ATmega1280 or ATmega2560 processor. (Arduino/Genuino Mega/Mega1280/Mega2560)"
 #endif
 
-#define Servo_VERSION       1.0.1	//software version of this library
+#define Servo_VERSION       1.2.1	//software version of this library
 
 #define MIN_PULSE_WIDTH       500	//the shortest pulse sent to a servo  
 #define MAX_PULSE_WIDTH      2500	//the longest pulse sent to a servo 
