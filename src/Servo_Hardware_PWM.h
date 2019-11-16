@@ -1,7 +1,7 @@
 /*
-  Servo_Hardware_PWM.h - This Library allows Arduino/Genuino Mega boards to control up to 6 servos with the integrated 16-bit hardware PWM timer/counter.
+  Servo_Hardware_PWM.h - This Library allows Arduino/Genuino Mega boards to control up to 9 servos with the integrated 16-bit hardware PWM timer/counter.
   Created by Daniel Duller, 11. January, 2019.
-  Changed by Daniel Duller, 14. October, 2019.
+  Changed by Daniel Duller, 16. November, 2019.
 
   ###############################################################################
   MIT License
@@ -29,7 +29,7 @@
 
 
   #########################################################
-  Only works on pin 2, 3, 7, 8, 44, and 45 on Arduino Mega!
+  Only works on pin 2, 3, 5, 6, 7, 8, 44, 45 and 46 on Arduino Mega!
   #########################################################
 			Tested on Arduino Mega 2560 R3.
   #########################################################
@@ -37,9 +37,9 @@
 
   The methods are:
 
-	Servo 								---		Class for manipulating servo motors connected to Arduino pins. (max. 6 elements)
+	Servo 								---		Class for manipulating servo motors connected to Arduino pins. (max. 9 elements)
 
-	attach(pin)  						---		Attaches a servo motor to an i/o pin. (only pin 2, 3, 7, 8, 44, and 45)
+	attach(pin)  						---		Attaches a servo motor to an i/o pin. (only pin 2, 3, 5, 6, 7, 8, 44, 45 and 46)
 
 	attach(pin, min, max)  				---		Attaches a servo motor to an i/o pin with a custom lower and upper pulse width limit.
 
@@ -67,20 +67,18 @@
 
 #include <inttypes.h>
 
-#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
-#warning "INFO: Servos can only be connected to the following pins: 2, 3, 7, 8, 44, and 45"
-#else
+#if !defined(__AVR_ATmega1280__) && !defined(__AVR_ATmega2560__)
 #error "ERROR: This library only supports boards with an ATmega1280 or ATmega2560 processor. (Arduino/Genuino Mega/Mega1280/Mega2560)"
 #endif
 
-#define Servo_VERSION       1.2.1	//software version of this library
+#define Servo_VERSION       1.3.0	//software version of this library
 
 #define MIN_PULSE_WIDTH       500	//the shortest pulse sent to a servo  
 #define MAX_PULSE_WIDTH      2500	//the longest pulse sent to a servo 
 #define DEFAULT_PULSE_WIDTH  1500	//default pulse width when servo is attached
 #define MAX_TIMER_COUNT		40000	//the timer TOP value (for creating 50Hz)
 
-#define MAX_SERVOS				6	//6 Servos can be attached
+#define MAX_SERVOS				9	//9 Servos can be attached
 #define INVALID_SERVO_NUMBER  255	//flag indicating an invalid servo index
 
 class Servo {
