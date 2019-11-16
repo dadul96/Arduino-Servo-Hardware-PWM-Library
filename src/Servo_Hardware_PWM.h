@@ -71,7 +71,7 @@
 #error "ERROR: This library only supports boards with an ATmega1280 or ATmega2560 processor. (Arduino/Genuino Mega/Mega1280/Mega2560)"
 #endif
 
-#define Servo_VERSION       1.2.1	//software version of this library
+#define Servo_VERSION       1.3.0	//software version of this library
 
 #define MIN_PULSE_WIDTH       500	//the shortest pulse sent to a servo  
 #define MAX_PULSE_WIDTH      2500	//the longest pulse sent to a servo 
