@@ -78,7 +78,7 @@
 #define DEFAULT_PULSE_WIDTH  1500	//default pulse width when servo is attached
 #define MAX_TIMER_COUNT		40000	//the timer TOP value (for creating 50Hz)
 
-#define MAX_SERVOS				6	//6 Servos can be attached
+#define MAX_SERVOS				9	//6 Servos can be attached
 #define INVALID_SERVO_NUMBER  255	//flag indicating an invalid servo index
 
 class Servo {
