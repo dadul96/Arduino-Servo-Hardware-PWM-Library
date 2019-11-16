@@ -67,9 +67,7 @@
 
 #include <inttypes.h>
 
-#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
-#warning "INFO: Servos can only be connected to the following pins: 2, 3, 7, 8, 44, and 45"
-#else
+#if !defined(__AVR_ATmega1280__) && !defined(__AVR_ATmega2560__)
 #error "ERROR: This library only supports boards with an ATmega1280 or ATmega2560 processor. (Arduino/Genuino Mega/Mega1280/Mega2560)"
 #endif
 
