@@ -14,8 +14,10 @@ Possible output pins are **pin 2, 3, 5, 6, 7, 8, 44, 45** and **46**.
 This library can be installed through the Arduino IDE library manager like so:
 ![](installation.gif)
 
-### Note
+### Notes
 Starting from version 1.3.0 this Servo-Library supports 9 instead of 6 servos! (usable pins are: 2, 3, 5, 6, 7, 8, 44, 45 and 46)
+
+---
 
 Starting from version 1.2.0 this Servo-Library is compatible with all the [original Arduino Servo Library](https://github.com/arduino-libraries/Servo) - commands available. In addition to these "standard"-functions, following commands are added:
 * ``` attach(int pin, int min, int max, int defaultPos)``` - Besides the ability to set the servo pin and the upper and lower pulse width limit, the starting pulse width of the servo can be set with the defaultPos. This allows the servo to start from a user-defined angle instead of the middle position.
