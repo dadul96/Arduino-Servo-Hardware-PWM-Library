@@ -44,22 +44,23 @@ uint8_t Servo::attach(int pin, int min, int max, int defaultPos) {
 	{
 		if (pin == 2)
 		{
-			if (pinActive[1] == BOOL_FALSE)
+			if (pinActive[1] == BOOL_FALSE && pinActive[2] == BOOL_FALSE)
 			{
-				//resetting the control register A and B:
+				//resetting the control register A, B, C:
 				TCCR3A = 0x0;
 				TCCR3B = 0x0;
+				TCCR3C = 0x0;
+
+				//setting the prescaler to 8 (2MHz):
+				TCCR3B |= (1 << CS31);
+
+				//setting the waveform generation mode to 14:
+				TCCR3A |= (1 << WGM31) | (0 << WGM30);
+				TCCR3B |= (1 << WGM32) | (1 << WGM33);
+
+				//setting the TOP value:
+				ICR3 = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
 			}
-
-			//setting the prescaler to 8 (2MHz):
-			TCCR3B |= (1 << CS31);
-
-			//setting the waveform generation mode to 15:
-			TCCR3A |= (1 << WGM31) | (1 << WGM30);
-			TCCR3B |= (1 << WGM32) | (1 << WGM33);
-
-			//setting the TOP value:
-			OCR3A = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
 
 			//setting the output to non inverted:
 			TCCR3A |= (1 << COM3B1);
@@ -74,22 +75,23 @@ uint8_t Servo::attach(int pin, int min, int max, int defaultPos) {
 		}
 		else if (pin == 3)
 		{
-			if (pinActive[0] == BOOL_FALSE)
+			if (pinActive[0] == BOOL_FALSE && pinActive[2] == BOOL_FALSE)
 			{
-				//resetting the control register A and B:
+				//resetting the control register A, B, C:
 				TCCR3A = 0x0;
 				TCCR3B = 0x0;
+				TCCR3C = 0x0;
+
+				//setting the prescaler to 8 (2MHz):
+				TCCR3B |= (1 << CS31);
+
+				//setting the waveform generation mode to 14:
+				TCCR3A |= (1 << WGM31) | (0 << WGM30);
+				TCCR3B |= (1 << WGM32) | (1 << WGM33);
+
+				//setting the TOP value:
+				ICR3 = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
 			}
-
-			//setting the prescaler to 8 (2MHz):
-			TCCR3B |= (1 << CS31);
-
-			//setting the waveform generation mode to 15:
-			TCCR3A |= (1 << WGM31) | (1 << WGM30);
-			TCCR3B |= (1 << WGM32) | (1 << WGM33);
-
-			//setting the TOP value:
-			OCR3A = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
 
 			//setting the output to non inverted:
 			TCCR3A |= (1 << COM3C1);
@@ -102,24 +104,87 @@ uint8_t Servo::attach(int pin, int min, int max, int defaultPos) {
 			pinActive[1] = BOOL_TRUE;
 			this->servoPin = 3;
 		}
-		else if (pin == 7)
+		else if (pin == 5)
 		{
-			if (pinActive[3] == BOOL_FALSE)
+			if (pinActive[0] == BOOL_FALSE && pinActive[1] == BOOL_FALSE)
 			{
-				//resetting the control register A and B:
-				TCCR4A = 0x0;
-				TCCR4B = 0x0;
+				//resetting the control register A, B, C:
+				TCCR3A = 0x0;
+				TCCR3B = 0x0;
+				TCCR3C = 0x0;
+
+				//setting the prescaler to 8 (2MHz):
+				TCCR3B |= (1 << CS31);
+
+				//setting the waveform generation mode to 14:
+				TCCR3A |= (1 << WGM31) | (0 << WGM30);
+				TCCR3B |= (1 << WGM32) | (1 << WGM33);
+
+				//setting the TOP value:
+				ICR3 = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
 			}
 
-			//setting the prescaler to 8 (2MHz):
-			TCCR4B |= (1 << CS41);
+			//setting the output to non inverted:
+			TCCR3A |= (1 << COM3A1);
 
-			//setting the waveform generation mode to 15:
-			TCCR4A |= (1 << WGM41) | (1 << WGM40);
-			TCCR4B |= (1 << WGM42) | (1 << WGM43);
+			OCR3A = this->defaultPos; //setting the pulse width
 
-			//setting the TOP value:
-			OCR4A = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
+			//OC3A, Port E, Bit 3; setting pin 5 as output:
+			DDRE |= (1 << PE3); //bit 3 (pin 5) as output  
+
+			pinActive[2] = BOOL_TRUE;
+			this->servoPin = 5;
+		}
+		else if (pin == 6)
+		{
+			if (pinActive[4] == BOOL_FALSE && pinActive[5] == BOOL_FALSE)
+			{
+				//resetting the control register A, B, C:
+				TCCR4A = 0x0;
+				TCCR4B = 0x0;
+				TCCR4C = 0x0;
+
+				//setting the prescaler to 8 (2MHz):
+				TCCR4B |= (1 << CS41);
+
+				//setting the waveform generation mode to 14:
+				TCCR4A |= (1 << WGM41) | (0 << WGM40);
+				TCCR4B |= (1 << WGM42) | (1 << WGM43);
+
+				//setting the TOP value:
+				ICR4 = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
+			}
+
+			//setting the output to non inverted:
+			TCCR4A |= (1 << COM4A1);
+
+			OCR4A = this->defaultPos; //setting the pulse width
+
+			//OC4A, Port H, Bit 3; setting pin 6 as output:
+			DDRH |= (1 << PH3); //bit 3 (pin 6) as output  
+
+			pinActive[3] = BOOL_TRUE;
+			this->servoPin = 6;
+		}
+		else if (pin == 7)
+		{
+			if (pinActive[3] == BOOL_FALSE && pinActive[5] == BOOL_FALSE)
+			{
+				//resetting the control register A, B, C:
+				TCCR4A = 0x0;
+				TCCR4B = 0x0;
+				TCCR4C = 0x0;
+
+				//setting the prescaler to 8 (2MHz):
+				TCCR4B |= (1 << CS41);
+
+				//setting the waveform generation mode to 14:
+				TCCR4A |= (1 << WGM41) | (0 << WGM40);
+				TCCR4B |= (1 << WGM42) | (1 << WGM43);
+
+				//setting the TOP value:
+				ICR4 = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
+			}
 
 			//setting the output to non inverted:
 			TCCR4A |= (1 << COM4B1);
@@ -129,27 +194,28 @@ uint8_t Servo::attach(int pin, int min, int max, int defaultPos) {
 			//OC4B, Port H, Bit 4; setting pin 7 as output:
 			DDRH |= (1 << PH4); //bit 4 (pin 7) as output  
 
-			pinActive[2] = BOOL_TRUE;
+			pinActive[4] = BOOL_TRUE;
 			this->servoPin = 7;
 		}
 		else if (pin == 8)
 		{
-			if (pinActive[2] == BOOL_FALSE)
-			{
-				//resetting the control register A and B:
-				TCCR4A = 0x0;
-				TCCR4B = 0x0;
-			}
+		if (pinActive[3] == BOOL_FALSE && pinActive[4] == BOOL_FALSE)
+		{
+			//resetting the control register A, B, C:
+			TCCR4A = 0x0;
+			TCCR4B = 0x0;
+			TCCR4C = 0x0;
 
 			//setting the prescaler to 8 (2MHz):
 			TCCR4B |= (1 << CS41);
 
-			//setting the waveform generation mode to 15:
-			TCCR4A |= (1 << WGM41) | (1 << WGM40);
+			//setting the waveform generation mode to 14:
+			TCCR4A |= (1 << WGM41) | (0 << WGM40);
 			TCCR4B |= (1 << WGM42) | (1 << WGM43);
 
 			//setting the TOP value:
-			OCR4A = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
+			ICR4 = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
+		}
 
 			//setting the output to non inverted:
 			TCCR4A |= (1 << COM4C1);
@@ -159,27 +225,28 @@ uint8_t Servo::attach(int pin, int min, int max, int defaultPos) {
 			//OC4C, Port H, Bit 5; setting pin 8 as output:
 			DDRH |= (1 << PH5); //bit 5 (pin 8) as output  
 
-			pinActive[3] = BOOL_TRUE;
+			pinActive[5] = BOOL_TRUE;
 			this->servoPin = 8;
 		}
 		else if (pin == 44)
 		{
-			if (pinActive[5] == BOOL_FALSE)
+			if (pinActive[7] == BOOL_FALSE && pinActive[8] == BOOL_FALSE)
 			{
-				//resetting the control register A and B:
+				//resetting the control register A, B, C:
 				TCCR5A = 0x0;
 				TCCR5B = 0x0;
+				TCCR5C = 0x0;
+
+				//setting the prescaler to 8 (2MHz):
+				TCCR5B |= (1 << CS51);
+
+				//setting the waveform generation mode to 14:
+				TCCR5A |= (1 << WGM51) | (0 << WGM50);
+				TCCR5B |= (1 << WGM52) | (1 << WGM53);
+
+				//setting the TOP value:
+				ICR5 = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
 			}
-
-			//setting the prescaler to 8 (2MHz):
-			TCCR5B |= (1 << CS51);
-
-			//setting the waveform generation mode to 15:
-			TCCR5A |= (1 << WGM51) | (1 << WGM50);
-			TCCR5B |= (1 << WGM52) | (1 << WGM53);
-
-			//setting the TOP value:
-			OCR5A = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
 
 			//setting the output to non inverted:
 			TCCR5A |= (1 << COM5C1);
@@ -189,27 +256,28 @@ uint8_t Servo::attach(int pin, int min, int max, int defaultPos) {
 			//OC5C, Port L, Bit 5; setting pin 44 as output:
 			DDRL |= (1 << PL5); //bit 5 (pin 44) as output
 
-			pinActive[4] = BOOL_TRUE;
+			pinActive[6] = BOOL_TRUE;
 			this->servoPin = 44;
 		}
 		else if (pin == 45)
 		{
-			if (pinActive[4] == BOOL_FALSE)
-			{
-				//resetting the control register A and B:
-				TCCR5A = 0x0;
-				TCCR5B = 0x0;
-			}
+		if (pinActive[6] == BOOL_FALSE && pinActive[8] == BOOL_FALSE)
+		{
+			//resetting the control register A, B, C:
+			TCCR5A = 0x0;
+			TCCR5B = 0x0;
+			TCCR5C = 0x0;
 
 			//setting the prescaler to 8 (2MHz):
 			TCCR5B |= (1 << CS51);
 
-			//setting the waveform generation mode to 15:
-			TCCR5A |= (1 << WGM51) | (1 << WGM50);
+			//setting the waveform generation mode to 14:
+			TCCR5A |= (1 << WGM51) | (0 << WGM50);
 			TCCR5B |= (1 << WGM52) | (1 << WGM53);
 
 			//setting the TOP value:
-			OCR5A = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
+			ICR5 = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
+		}
 
 			//setting the output to non inverted:
 			TCCR5A |= (1 << COM5B1);
@@ -219,8 +287,39 @@ uint8_t Servo::attach(int pin, int min, int max, int defaultPos) {
 			//OC5B, Port L, Bit 4; setting pin 45 as output:
 			DDRL |= (1 << PL4); //bit 4 (pin 45) as output
 
-			pinActive[5] = BOOL_TRUE;
+			pinActive[7] = BOOL_TRUE;
 			this->servoPin = 45;
+		}
+		else if (pin == 46)
+		{
+		if (pinActive[6] == BOOL_FALSE && pinActive[7] == BOOL_FALSE)
+		{
+			//resetting the control register A, B, C:
+			TCCR5A = 0x0;
+			TCCR5B = 0x0;
+			TCCR5C = 0x0;
+
+			//setting the prescaler to 8 (2MHz):
+			TCCR5B |= (1 << CS51);
+
+			//setting the waveform generation mode to 14:
+			TCCR5A |= (1 << WGM51) | (0 << WGM50);
+			TCCR5B |= (1 << WGM52) | (1 << WGM53);
+
+			//setting the TOP value:
+			ICR5 = MAX_TIMER_COUNT; //results in 50Hz at 2MHz Clock
+		}
+
+		//setting the output to non inverted:
+		TCCR5A |= (1 << COM5A1);
+
+		OCR5A = this->defaultPos; //setting the pulse width
+
+		//OC5A, Port L, Bit 3; setting pin 46 as output:
+		DDRL |= (1 << PL3); //bit 3 (pin 46) as output
+
+		pinActive[8] = BOOL_TRUE;
+		this->servoPin = 46;
 		}
 	}
 
@@ -230,13 +329,14 @@ uint8_t Servo::attach(int pin, int min, int max, int defaultPos) {
 void Servo::detach() {
 	if (servoPin == 2 && pinActive[0] == BOOL_TRUE)
 	{
-		if (pinActive[1] == BOOL_FALSE)
+		if (pinActive[1] == BOOL_FALSE && pinActive[2] == BOOL_FALSE)
 		{
-			//resetting the control register A and B:
+			//resetting the control register A, B, C:
 			TCCR3A = 0x0;
 			TCCR3B = 0x0;
+			TCCR3C = 0x0;
 			//resetting the TOP value:
-			OCR3A = 0x0;
+			ICR3 = 0x0;
 		}
 		OCR3B = 0x0; //resetting the pulse width
 		DDRE ^= (1 << PE4); //bit 4 (pin 2) stop output
@@ -245,89 +345,143 @@ void Servo::detach() {
 	}
 	else if (servoPin == 3 && pinActive[1] == BOOL_TRUE)
 	{
-		if (pinActive[0] == BOOL_FALSE)
+		if (pinActive[0] == BOOL_FALSE && pinActive[2] == BOOL_FALSE)
 		{
-			//resetting the control register A and B:
+			//resetting the control register A, B, C:
 			TCCR3A = 0x0;
 			TCCR3B = 0x0;
+			TCCR3C = 0x0;
 			//resetting the TOP value:
-			OCR3A = 0x0;
+			ICR3 = 0x0;
 		}
 		OCR3C = 0x0; //resetting the pulse width
 		DDRE ^= (1 << PE5); //bit 5 (pin 3) stop output
 		pinActive[1] = BOOL_FALSE;
 		this->servoPin = 0;
 	}
-	else if (servoPin == 7 && pinActive[2] == BOOL_TRUE)
+	else if (servoPin == 5 && pinActive[2] == BOOL_TRUE)
 	{
-		if (pinActive[3] == BOOL_FALSE)
+		if (pinActive[0] == BOOL_FALSE && pinActive[1] == BOOL_FALSE)
 		{
-			//resetting the control register A and B:
-			TCCR4A = 0x0;
-			TCCR4B = 0x0;
+			//resetting the control register A, B, C:
+			TCCR3A = 0x0;
+			TCCR3B = 0x0;
+			TCCR3C = 0x0;
 			//resetting the TOP value:
-			OCR4A = 0x0;
+			ICR3 = 0x0;
 		}
-		OCR4B = 0x0; //resetting the pulse width
-		DDRH ^= (1 << PH4); //bit 4 (pin 7) stop output
+		OCR3A = 0x0; //resetting the pulse width
+		DDRE ^= (1 << PE3); //bit 3 (pin 5) stop output
 		pinActive[2] = BOOL_FALSE;
 		this->servoPin = 0;
 	}
-	else if (servoPin == 8 && pinActive[3] == BOOL_TRUE)
+	else if (servoPin == 6 && pinActive[3] == BOOL_TRUE)
 	{
-		if (pinActive[2] == BOOL_FALSE)
+		if (pinActive[4] == BOOL_FALSE && pinActive[5] == BOOL_FALSE)
 		{
-			//resetting the control register A and B:
+			//resetting the control register A, B, C:
 			TCCR4A = 0x0;
 			TCCR4B = 0x0;
+			TCCR4C = 0x0;
 			//resetting the TOP value:
-			OCR4A = 0x0;
+			ICR4 = 0x0;
 		}
-		OCR4C = 0x0; //resetting the pulse width
-		DDRH ^= (1 << PH5); //bit 5 (pin 8) stop output
+		OCR4A = 0x0; //resetting the pulse width
+		DDRH ^= (1 << PH3); //bit 3 (pin 6) stop output
 		pinActive[3] = BOOL_FALSE;
 		this->servoPin = 0;
 	}
-	else if (servoPin == 44 && pinActive[4] == BOOL_TRUE)
+	else if (servoPin == 7 && pinActive[4] == BOOL_TRUE)
 	{
-		if (pinActive[5] == BOOL_FALSE)
+		if (pinActive[3] == BOOL_FALSE && pinActive[5] == BOOL_FALSE)
 		{
-			//resetting the control register A and B:
-			TCCR5A = 0x0;
-			TCCR5B = 0x0;
+			//resetting the control register A, B, C:
+			TCCR4A = 0x0;
+			TCCR4B = 0x0;
+			TCCR4C = 0x0;
 			//resetting the TOP value:
-			OCR5A = 0x0;
+			ICR4 = 0x0;
 		}
-		OCR5C = 0x0; //resetting the pulse width
-		DDRL ^= (1 << PL5); //bit 5 (pin 44) stop output
+		OCR4B = 0x0; //resetting the pulse width
+		DDRH ^= (1 << PH4); //bit 4 (pin 7) stop output
 		pinActive[4] = BOOL_FALSE;
 		this->servoPin = 0;
 	}
-	else if (servoPin == 45 && pinActive[5] == BOOL_TRUE)
+	else if (servoPin == 8 && pinActive[5] == BOOL_TRUE)
 	{
-		if (pinActive[4] == BOOL_FALSE)
+		if (pinActive[3] == BOOL_FALSE && pinActive[4] == BOOL_FALSE)
 		{
-			//resetting the control register A and B:
+			//resetting the control register A, B, C:
+			TCCR4A = 0x0;
+			TCCR4B = 0x0;
+			TCCR4C = 0x0;
+			//resetting the TOP value:
+			ICR4 = 0x0;
+		}
+		OCR4C = 0x0; //resetting the pulse width
+		DDRH ^= (1 << PH5); //bit 5 (pin 8) stop output
+		pinActive[5] = BOOL_FALSE;
+		this->servoPin = 0;
+	}
+	else if (servoPin == 44 && pinActive[6] == BOOL_TRUE)
+	{
+		if (pinActive[7] == BOOL_FALSE && pinActive[8] == BOOL_FALSE)
+		{
+			//resetting the control register A, B, C:
 			TCCR5A = 0x0;
 			TCCR5B = 0x0;
+			TCCR5C = 0x0;
 			//resetting the TOP value:
-			OCR5A = 0x0;
+			ICR5 = 0x0;
+		}
+		OCR5C = 0x0; //resetting the pulse width
+		DDRL ^= (1 << PL5); //bit 5 (pin 44) stop output
+		pinActive[6] = BOOL_FALSE;
+		this->servoPin = 0;
+	}
+	else if (servoPin == 45 && pinActive[7] == BOOL_TRUE)
+	{
+		if (pinActive[6] == BOOL_FALSE && pinActive[8] == BOOL_FALSE)
+		{
+			//resetting the control register A, B, C:
+			TCCR5A = 0x0;
+			TCCR5B = 0x0;
+			TCCR5C = 0x0;
+			//resetting the TOP value:
+			ICR5 = 0x0;
 		}
 		OCR5B = 0x0; //resetting the pulse width
 		DDRL ^= (1 << PL4); //bit 4 (pin 45) stop output
-		pinActive[5] = BOOL_FALSE;
+		pinActive[7] = BOOL_FALSE;
 		this->servoPin = 0;
+	}
+	else if (servoPin == 46 && pinActive[8] == BOOL_TRUE)
+	{
+	if (pinActive[6] == BOOL_FALSE && pinActive[7] == BOOL_FALSE)
+	{
+		//resetting the control register A, B, C:
+		TCCR5A = 0x0;
+		TCCR5B = 0x0;
+		TCCR5C = 0x0;
+		//resetting the TOP value:
+		ICR5 = 0x0;
+	}
+	OCR5A = 0x0; //resetting the pulse width
+	DDRL ^= (1 << PL3); //bit 3 (pin 46) stop output
+	pinActive[8] = BOOL_FALSE;
+	this->servoPin = 0;
 	}
 }
 
 void Servo::detachAll() {
 	if (pinActive[0] == BOOL_TRUE)
 	{
-		//resetting the control register A and B:
+		//resetting the control register A, B, C:
 		TCCR3A = 0x0;
 		TCCR3B = 0x0;
+		TCCR3C = 0x0;
 		//resetting the TOP value:
-		OCR3A = 0x0;
+		ICR3 = 0x0;
 
 		OCR3B = 0x0; //resetting the pulse width
 		DDRE ^= (1 << PE4); //bit 4 (pin 2) stop output
@@ -335,11 +489,12 @@ void Servo::detachAll() {
 	}
 	if (pinActive[1] == BOOL_TRUE)
 	{
-		//resetting the control register A and B:
+		//resetting the control register A, B, C:
 		TCCR3A = 0x0;
 		TCCR3B = 0x0;
+		TCCR3C = 0x0;
 		//resetting the TOP value:
-		OCR3A = 0x0;
+		ICR3 = 0x0;
 
 		OCR3C = 0x0; //resetting the pulse width
 		DDRE ^= (1 << PE5); //bit 5 (pin 3) stop output
@@ -347,51 +502,94 @@ void Servo::detachAll() {
 	}
 	if (pinActive[2] == BOOL_TRUE)
 	{
-		//resetting the control register A and B:
-		TCCR4A = 0x0;
-		TCCR4B = 0x0;
+		//resetting the control register A, B, C:
+		TCCR3A = 0x0;
+		TCCR3B = 0x0;
+		TCCR3C = 0x0;
 		//resetting the TOP value:
-		OCR4A = 0x0;
+		ICR3 = 0x0;
 
-		OCR4B = 0x0; //resetting the pulse width
-		DDRH ^= (1 << PH4); //bit 4 (pin 7) stop output
+		OCR3A = 0x0; //resetting the pulse width
+		DDRE ^= (1 << PE3); //bit 3 (pin 5) stop output
 		pinActive[2] = BOOL_FALSE;
 	}
 	if (pinActive[3] == BOOL_TRUE)
 	{
-		//resetting the control register A and B:
+		//resetting the control register A, B, C:
 		TCCR4A = 0x0;
 		TCCR4B = 0x0;
+		TCCR4C = 0x0;
 		//resetting the TOP value:
-		OCR4A = 0x0;
+		ICR4 = 0x0;
 
-		OCR4C = 0x0; //resetting the pulse width
-		DDRH ^= (1 << PH5); //bit 5 (pin 8) stop output
+		OCR4A = 0x0; //resetting the pulse width
+		DDRH ^= (1 << PH3); //bit 3 (pin 6) stop output
 		pinActive[3] = BOOL_FALSE;
 	}
 	if (pinActive[4] == BOOL_TRUE)
 	{
-		//resetting the control register A and B:
-		TCCR5A = 0x0;
-		TCCR5B = 0x0;
+		//resetting the control register A, B, C:
+		TCCR4A = 0x0;
+		TCCR4B = 0x0;
+		TCCR4C = 0x0;
 		//resetting the TOP value:
-		OCR5A = 0x0;
+		ICR4 = 0x0;
 
-		OCR5C = 0x0; //resetting the pulse width
-		DDRL ^= (1 << PL5); //bit 5 (pin 44) stop output
+		OCR4B = 0x0; //resetting the pulse width
+		DDRH ^= (1 << PH4); //bit 4 (pin 7) stop output
 		pinActive[4] = BOOL_FALSE;
 	}
 	if (pinActive[5] == BOOL_TRUE)
 	{
-		//resetting the control register A and B:
+		//resetting the control register A, B, C:
+		TCCR4A = 0x0;
+		TCCR4B = 0x0;
+		TCCR4C = 0x0;
+		//resetting the TOP value:
+		ICR4 = 0x0;
+
+		OCR4C = 0x0; //resetting the pulse width
+		DDRH ^= (1 << PH5); //bit 5 (pin 8) stop output
+		pinActive[5] = BOOL_FALSE;
+	}
+	if (pinActive[6] == BOOL_TRUE)
+	{
+		//resetting the control register A, B, C:
 		TCCR5A = 0x0;
 		TCCR5B = 0x0;
+		TCCR5C = 0x0;
 		//resetting the TOP value:
-		OCR5A = 0x0;
+		ICR5 = 0x0;
+
+		OCR5C = 0x0; //resetting the pulse width
+		DDRL ^= (1 << PL5); //bit 5 (pin 44) stop output
+		pinActive[6] = BOOL_FALSE;
+	}
+	if (pinActive[7] == BOOL_TRUE)
+	{
+		//resetting the control register A, B, C:
+		TCCR5A = 0x0;
+		TCCR5B = 0x0;
+		TCCR5C = 0x0;
+		//resetting the TOP value:
+		ICR5 = 0x0;
 
 		OCR5B = 0x0; //resetting the pulse width
 		DDRL ^= (1 << PL4); //bit 4 (pin 45) stop output
-		pinActive[5] = BOOL_FALSE;
+		pinActive[7] = BOOL_FALSE;
+	}
+	if (pinActive[8] == BOOL_TRUE)
+	{
+		//resetting the control register A, B, C:
+		TCCR5A = 0x0;
+		TCCR5B = 0x0;
+		TCCR5C = 0x0;
+		//resetting the TOP value:
+		ICR5 = 0x0;
+
+		OCR5A = 0x0; //resetting the pulse width
+		DDRL ^= (1 << PL3); //bit 3 (pin 46) stop output
+		pinActive[8] = BOOL_FALSE;
 	}
 }
 
@@ -440,25 +638,40 @@ void Servo::writeMicroseconds(int value) {
 			OCR3C = 0x0;
 			OCR3C = this->pulseWidth * 2;
 		}
-		else if (this->servoPin == 7 && pinActive[2] == BOOL_TRUE)
+		else if (this->servoPin == 5 && pinActive[2] == BOOL_TRUE)
+		{
+			OCR3A = 0x0;
+			OCR3A = this->pulseWidth * 2;
+		}
+		else if (this->servoPin == 6 && pinActive[3] == BOOL_TRUE)
+		{
+			OCR4A = 0x0;
+			OCR4A = this->pulseWidth * 2;
+		}
+		else if (this->servoPin == 7 && pinActive[4] == BOOL_TRUE)
 		{
 			OCR4B = 0x0;
 			OCR4B = this->pulseWidth * 2;
 		}
-		else if (this->servoPin == 8 && pinActive[3] == BOOL_TRUE)
+		else if (this->servoPin == 8 && pinActive[5] == BOOL_TRUE)
 		{
 			OCR4C = 0x0;
 			OCR4C = this->pulseWidth * 2;
 		}
-		else if (this->servoPin == 44 && pinActive[4] == BOOL_TRUE)
+		else if (this->servoPin == 44 && pinActive[6] == BOOL_TRUE)
 		{
 			OCR5C = 0x0;
 			OCR5C = this->pulseWidth * 2;
 		}
-		else if (this->servoPin == 45 && pinActive[5] == BOOL_TRUE)
+		else if (this->servoPin == 45 && pinActive[7] == BOOL_TRUE)
 		{
 			OCR5B = 0x0;
 			OCR5B = this->pulseWidth * 2;
+		}
+		else if (this->servoPin == 46 && pinActive[8] == BOOL_TRUE)
+		{
+			OCR5A = 0x0;
+			OCR5A = this->pulseWidth * 2;
 		}
 	}
 }

@@ -1,8 +1,8 @@
 The functions of the library are:
 
-**Servo** -- Class for manipulating servo motors connected to Arduino pins. (**max. 6** elements)
+**Servo** -- Class for manipulating servo motors connected to Arduino pins. (**max. 9** elements)
 
-**attach(pin)** -- Attaches a servo motor to an i/o pin. (only **pin 2, 3, 7, 8, 44,** and **45**)
+**attach(pin)** -- Attaches a servo motor to an i/o pin. (only **pin 2, 3, 5, 6, 7, 8, 44, 45** and **46**)
 
 **attach(pin, min, max)** -- Attaches a servo motor to an i/o pin with a custom lower and upper pulse width limit.
 
